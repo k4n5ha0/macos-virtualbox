@@ -36,6 +36,14 @@ Developing and maintaining VirtualBox or macOS features is beyond the scope of t
 ### CPU compatibility
 
 macOS guests on VirtualBox are incompatible with some CPU models. If the guest macOS boot process hangs on “LoadKernelFromStream”, “EndRandomSeed”, or "EXITBS", see the [documentation command](#documentation) regarding VirtualBox CPU profiles and [CPUID settings](https://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm-teleport). Some CPU models released in 2020 and later may fail to start or complete the installer, and may require manually adjusting the CPUID settings.
+如果出现异常，删掉出现异常的虚拟机，新开一个窗口执行，提前切换到vbox主窗口
+```
+cd C:\Program Files\Oracle\VirtualBox
+```
+然后重新用sh脚本新建虚拟机，运行时不断执行以下命令直到成功执行
+```
+VBoxManage modifyvm "macOS" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff && VBoxManage modifyvm "macOS" --cpu-profile "Intel Core i7-6700K"
+```
 
 ### Performance and deployment
 
